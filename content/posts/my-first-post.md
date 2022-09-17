@@ -2,7 +2,7 @@
 title: "My First Post"
 date: 2022-09-17T15:51:58+05:00
 summary: "This is a demo post."
-draft: true
+draft: false
 ---
 
 
