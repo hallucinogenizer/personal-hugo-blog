@@ -2,3 +2,9 @@ baseURL = 'https://www.rohanhussain.com/blog'
 languageCode = 'en-us'
 title = "Rohan Hussain's Blog"
 theme = "ananke"
+
+[params]
+    navbarLinkTitle = "Blog Home"
+
+[menus]
+    main = [{name = 'Portfolio Home', url = 'https://rohanhussain.com'}]
