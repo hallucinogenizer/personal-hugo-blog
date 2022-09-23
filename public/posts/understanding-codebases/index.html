@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Understanding Large Unfamiliar Codebases | Rohan Hussain&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This is a demo post.">
+    <meta name="generator" content="Hugo 0.103.0" />
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/blog/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="Understanding Large Unfamiliar Codebases" />
+<meta property="og:description" content="This is a demo post." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.rohanhussain.com/blog/posts/understanding-codebases/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-09-23T15:51:58+05:00" />
+<meta property="article:modified_time" content="2022-09-23T15:51:58+05:00" />
+
+<meta itemprop="name" content="Understanding Large Unfamiliar Codebases">
+<meta itemprop="description" content="This is a demo post."><meta itemprop="datePublished" content="2022-09-23T15:51:58+05:00" />
+<meta itemprop="dateModified" content="2022-09-23T15:51:58+05:00" />
+<meta itemprop="wordCount" content="555">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Understanding Large Unfamiliar Codebases"/>
+<meta name="twitter:description" content="This is a demo post."/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+    <div class="flex-l justify-between items-center center">
+      <a href="/blog/" class="f3 fw2 hover-white no-underline white-90 dib">
+        
+          Blog Home
+        
+      </a>
+      <div class="flex-l items-center">
+        
+
+        
+          <ul class="pl0 mr3">
+            
+            <li class="list f5 f4-ns fw4 dib pr3">
+              <a class="hover-white no-underline white-90" href="https://rohanhussain.com" title="Portfolio Home page">
+                Portfolio Home
+              </a>
+            </li>
+            
+          </ul>
+        
+        
+<div class="ananke-socials">
+  
+</div>
+
+      </div>
+    </div>
+  </nav>
+  
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Understanding Large Unfamiliar Codebases</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2022-09-23T15:51:58+05:00">September 23, 2022</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h1 id="table-of-contents">Table of Contents</h1>
+<ul>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#the-problem">The Problem</a></li>
+<li><a href="#the-solutions">The Solutions</a>
+<ul>
+<li><a href="#understanding-the-product">Understanding the Product</a></li>
+<li><a href="#removing-things">Removing Things</a></li>
+<li><a href="#taking-up-tasks">Taking up tasks</a></li>
+<li><a href="#white-boards-and-markers">White Boards and Markers</a></li>
+<li><a href="#browser-devtools--extensions">Browser DevTools &amp; Extensions</a></li>
+<li><a href="#reading-github">Reading GitHub</a></li>
+<li><a href="#documentations--pagers">Documentations &amp; Pagers</a></li>
+<li><a href="#asking-questions">Asking Questions</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="the-problem">The Problem</h1>
+<p>Right off the bat let me say that when you join a new company and enter its codebase for the first time, it is bound to be difficult. No matter what you do, it won&rsquo;t be as easy as working on a project that you built from scratch.</p>
+<h1 id="the-solutions">The Solutions</h1>
+<p>There are several things you can do to ease your way into an unfamiliar codebase:</p>
+<h2 id="understanding-the-product">Understanding the Product</h2>
+<p>If you don&rsquo;t know what a piece of code intends to do, you will have a hard time understanding how it does it. Trying to understand code without first understanding what it does is like trying to put together a 1000-piece puzzle without first knowing what the end result should look like.</p>
+<p>The following are some pro-tips regarding this:</p>
+<ul>
+<li>If the codebase has selenium tests, run them and watch. You will learn how a feature works end-to-end.</li>
+<li>When trying to understand a single unit, such as a React Component, reading its unit tests may give you some useful hints.</li>
+<li>You can also write tests on the feature you are trying to understand. It helps you deeply understand behavior.</li>
+</ul>
+<h2 id="removing-things">Removing Things</h2>
+<p>A great way to see what a line of code does is to remove it and see what changes. This way, by removing lines one at a time, you can understand what many of them do.</p>
+<h2 id="taking-up-tasks">Taking up tasks</h2>
+<p>No matter how much you don&rsquo;t want to hear this, true understanding will only come when you work with and extend the code you&rsquo;re trying to understand. Try to take up tasks regarding the code you want to understand, such as fixing bugs in it, adding new features, or improving its performance.</p>
+<h2 id="white-boards-and-markers">White Boards and Markers</h2>
+<p>This works well especially when trying to understand full stack applications or complex React component trees. In React, for example, you can draw all relevant react components and their state, then try to visualize props being passed to children, and changes bubbling up. This helps you see the bigger picture and not get lost in implementation details.</p>
+<h2 id="browser-devtools--extensions">Browser DevTools &amp; Extensions</h2>
+<p>These are especially helpful when it comes to understanding network requests &amp; responses, React components &amp; state, and Redux stores. The Redux devtools extension even has a time-travel feature where you can replay state changes over time.</p>
+<h2 id="reading-github">Reading GitHub</h2>
+<p>Read Pull Requests that created (or made changes to) the component you are trying to understand. Inside the PR, try to find the commit history. There, hopefully, you will see the component being built little by little incrementally and that will be easier to understand with the aid of commit statements. The PR may also contain information about why the component was written in the first place.</p>
+<h2 id="documentations--pagers">Documentations &amp; Pagers</h2>
+<p>Any good organization will definitely have documented their code or written pagers on at least the major parts of the codebase, such as database models, cloud deployment, etc. Reading them can help.</p>
+<h2 id="asking-questions">Asking Questions</h2>
+<p>Finally, as a last resort, you can always ask someone what a piece of code does. I call this a last resort as this doesn&rsquo;t result in a deep understanding of the code.</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://www.rohanhussain.com/blog/" >
+    &copy;  Rohan Hussain's Blog 2022 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

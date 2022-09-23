@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://www.rohanhussain.com/blog/posts/my-first-post/</loc>
-    <lastmod>2022-09-17T15:51:58+05:00</lastmod>
-  </url><url>
     <loc>https://www.rohanhussain.com/blog/posts/</loc>
-    <lastmod>2022-09-17T15:51:58+05:00</lastmod>
+    <lastmod>2022-09-23T15:51:58+05:00</lastmod>
   </url><url>
     <loc>https://www.rohanhussain.com/blog/</loc>
-    <lastmod>2022-09-17T15:51:58+05:00</lastmod>
+    <lastmod>2022-09-23T15:51:58+05:00</lastmod>
+  </url><url>
+    <loc>https://www.rohanhussain.com/blog/posts/understanding-codebases/</loc>
+    <lastmod>2022-09-23T15:51:58+05:00</lastmod>
   </url><url>
     <loc>https://www.rohanhussain.com/blog/categories/</loc>
   </url><url>

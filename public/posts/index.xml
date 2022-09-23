@@ -6,13 +6,13 @@
     <description>Recent content in Posts on Rohan Hussain&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 17 Sep 2022 15:51:58 +0500</lastBuildDate><atom:link href="https://www.rohanhussain.com/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Sep 2022 15:51:58 +0500</lastBuildDate><atom:link href="https://www.rohanhussain.com/blog/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>My First Post</title>
-      <link>https://www.rohanhussain.com/blog/posts/my-first-post/</link>
-      <pubDate>Sat, 17 Sep 2022 15:51:58 +0500</pubDate>
+      <title>Understanding Large Unfamiliar Codebases</title>
+      <link>https://www.rohanhussain.com/blog/posts/understanding-codebases/</link>
+      <pubDate>Fri, 23 Sep 2022 15:51:58 +0500</pubDate>
       
-      <guid>https://www.rohanhussain.com/blog/posts/my-first-post/</guid>
+      <guid>https://www.rohanhussain.com/blog/posts/understanding-codebases/</guid>
       <description>This is a demo post.</description>
     </item>
     
