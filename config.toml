@@ -5,8 +5,10 @@ theme = "ananke"
 summaryLength = 20
 disqusShortname = "rohanhussain-com-blog"
 
+
+
 [params]
     navbarLinkTitle = "Blog Home"
 
 [menus]
-    main = [{name = 'Portfolio Home', url = 'https://rohanhussain.com'}]
+    main = [{name = "All Posts", url='/posts'}, {name = 'Portfolio Home', url = 'https://rohanhussain.com'}]
