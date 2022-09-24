@@ -1,22 +1,9 @@
 ---
 title: "Understanding Large Unfamiliar Codebases"
 date: 2022-09-23T15:51:58+05:00
-summary: "This is a demo post."
+summary: "There are several things you can do to ease your way into an unfamiliar codebase:"
 draft: false
 ---
-
-# Table of Contents
-- [Table of Contents](#table-of-contents)
-- [The Problem](#the-problem)
-- [The Solutions](#the-solutions)
-  - [Understanding the Product](#understanding-the-product)
-  - [Removing Things](#removing-things)
-  - [Taking up tasks](#taking-up-tasks)
-  - [White Boards and Markers](#white-boards-and-markers)
-  - [Browser DevTools & Extensions](#browser-devtools--extensions)
-  - [Reading GitHub](#reading-github)
-  - [Documentations & Pagers](#documentations--pagers)
-  - [Asking Questions](#asking-questions)
 
 # The Problem
 Right off the bat let me say that when you join a new company and enter its codebase for the first time, it is bound to be difficult. No matter what you do, it won't be as easy as working on a project that you built from scratch.
@@ -29,9 +16,9 @@ If you don't know what a piece of code intends to do, you will have a hard time 
 
 The following are some pro-tips regarding this:
 
-- If the codebase has selenium tests, run them and watch. You will learn how a feature works end-to-end.
-- When trying to understand a single unit, such as a React Component, reading its unit tests may give you some useful hints.
-- You can also write tests on the feature you are trying to understand. It helps you deeply understand behavior.
+- If the codebase has **selenium tests**, run them and watch. You will learn how a feature works end-to-end.
+- When trying to understand a single unit, such as a React Component, reading its **unit tests** may give you some useful hints.
+- You can also **write tests** on the feature you are trying to understand. It helps you deeply understand behavior.
 
 ## Removing Things
 A great way to see what a line of code does is to remove it and see what changes. This way, by removing lines one at a time, you can understand what many of them do.

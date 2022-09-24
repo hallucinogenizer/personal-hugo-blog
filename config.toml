@@ -2,6 +2,7 @@ baseURL = 'https://www.rohanhussain.com/blog'
 languageCode = 'en-us'
 title = "Rohan Hussain's Blog"
 theme = "ananke"
+summaryLength = 20
 
 [params]
     navbarLinkTitle = "Blog Home"
