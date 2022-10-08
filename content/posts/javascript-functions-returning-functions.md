@@ -141,7 +141,7 @@ sum2(90) //output: 100
 // we can do the following:
 sum(10)(90) //output: 100
 ```
-The `sum(10)` statement returns a function (`sum2`) which is immediately called like this 
+The `sum(10)` statement returns a function (`sum2`) which is immediately called. Imagine these steps like this:
 ```javascript
 sum(10)(90) -> sum2(90) -> 100
 ``` 
