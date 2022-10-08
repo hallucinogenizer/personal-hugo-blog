@@ -1,5 +1,5 @@
 ---
-title: "Javascript Super Arrow Functions"
+title: "JavaScript Super Arrow Functions"
 summary: "Arrow functions that return arrow functions `() => () => ...`"
 date: 2022-10-08T11:35:18+05:00
 draft: false

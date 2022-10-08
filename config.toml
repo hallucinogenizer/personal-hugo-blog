@@ -6,8 +6,6 @@ summaryLength = 20
 disqusShortname = "rohanhussain-com-blog"
 googleAnalytics = "G-G62YG0ET9R"
 
-
-
 [params]
     navbarLinkTitle = "Blog Home"
 
