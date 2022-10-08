@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Javascript Super Arrow Functions | Rohan Hussain&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Arrow functions that return arrow functions () =&gt; () =&gt; ...">
+    <meta name="generator" content="Hugo 0.103.0" />
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/blog/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="Javascript Super Arrow Functions" />
+<meta property="og:description" content="Arrow functions that return arrow functions () =&gt; () =&gt; ..." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.rohanhussain.com/blog/posts/javascript-functions-returning-functions/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-08T11:35:18+05:00" />
+<meta property="article:modified_time" content="2022-10-08T11:35:18+05:00" />
+
+<meta itemprop="name" content="Javascript Super Arrow Functions">
+<meta itemprop="description" content="Arrow functions that return arrow functions () =&gt; () =&gt; ..."><meta itemprop="datePublished" content="2022-10-08T11:35:18+05:00" />
+<meta itemprop="dateModified" content="2022-10-08T11:35:18+05:00" />
+<meta itemprop="wordCount" content="2246">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Javascript Super Arrow Functions"/>
+<meta name="twitter:description" content="Arrow functions that return arrow functions () =&gt; () =&gt; ..."/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+    <div class="flex-l justify-between items-center center">
+      <a href="/blog/" class="f3 fw2 hover-white no-underline white-90 dib">
+        
+          Blog Home
+        
+      </a>
+      <div class="flex-l items-center">
+        
+
+        
+          <ul class="pl0 mr3">
+            
+            <li class="list f5 f4-ns fw4 dib pr3">
+              <a class="hover-white no-underline white-90" href="/blog/posts" title="All Posts page">
+                All Posts
+              </a>
+            </li>
+            
+            <li class="list f5 f4-ns fw4 dib pr3">
+              <a class="hover-white no-underline white-90" href="https://rohanhussain.com" title="Portfolio Home page">
+                Portfolio Home
+              </a>
+            </li>
+            
+          </ul>
+        
+        
+<div class="ananke-socials">
+  
+</div>
+
+      </div>
+    </div>
+  </nav>
+  
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Javascript Super Arrow Functions</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2022-10-08T11:35:18+05:00">October 8, 2022</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>You may have seen arrow functions written like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">sum</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">a</span>) =&gt; (<span style="color:#a6e22e">b</span>) =&gt; (<span style="color:#a6e22e">c</span>) =&gt; <span style="color:#a6e22e">a</span><span style="color:#f92672">+</span><span style="color:#a6e22e">b</span><span style="color:#f92672">+</span><span style="color:#a6e22e">c</span>
+</span></span></code></pre></div><p>This article will explain how in some cases, the above syntax can help us write clean, concise, and functionally pure code.
+At first glance, one can estimate that the <code>sum</code> function above computes the sum of three numbers <code>a</code>, <code>b</code>, <code>c</code>.</p>
+<p>What is interesting about it is that it is called like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">1</span>)(<span style="color:#ae81ff">2</span>)(<span style="color:#ae81ff">3</span>)
+</span></span></code></pre></div><p>unlike your day-to-day javascript function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>) <span style="color:#75715e">//output: 6
+</span></span></span></code></pre></div><p>You may have two questions in your mind right now:</p>
+<ol>
+<li><strong>How</strong> does this arrow function work?</li>
+<li><strong>Why</strong> would you want to write an arrow function like this?</li>
+</ol>
+<p>Let&rsquo;s answer both. You&rsquo;ll need to understand the <strong>How</strong> before being able to understand the <strong>Why</strong>.</p>
+<h2 id="how">How</h2>
+<p>Let&rsquo;s start off with a simple example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">sum</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">a</span>) =&gt; (<span style="color:#a6e22e">b</span>) =&gt; <span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">1</span>)(<span style="color:#ae81ff">2</span>) <span style="color:#75715e">//output: 3
+</span></span></span></code></pre></div><h3 id="function-definition">Function Definition</h3>
+<p>There are two arrow functions here if you notice. The first function returns the second function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">sum</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">a</span>) =&gt; (<span style="color:#a6e22e">b</span>) =&gt; <span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span>
+</span></span></code></pre></div><p>The first arrow function takes <code>(a)</code> as an argument and returns another function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">sum</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">a</span>) =&gt; <span style="color:#66d9ef">function</span>
+</span></span></code></pre></div><p>The second arrow function is the one that the first arrow function returns:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>(<span style="color:#a6e22e">b</span>) =&gt; <span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span> <span style="color:#75715e">// is a function
+</span></span></span></code></pre></div><p>This second arrow function takes <code>(b)</code> as an argument and returns the sum (which is most probably a number).</p>
+<p>To further drive home this point, let&rsquo;s convert both of these arrow functions into regular functions, starting with the first arrow function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// 2 arrow functions
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">sum</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">a</span>) =&gt; (<span style="color:#a6e22e">b</span>) =&gt; <span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//change outer (1st) arrow function to regular function
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">a</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (<span style="color:#a6e22e">b</span>) =&gt; <span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Now the distinction between both functions should be clearer. Let&rsquo;s convert the inner arrow function to a regular function as well to make the distinction crystal clear:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">a</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> 
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">b</span>) {
+</span></span><span style="display:flex; background-color:#3c3d38"><span>            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div></p>
+<h3 id="function-usage">Function Usage</h3>
+<p>Now that we somewhat understand the function definition, let&rsquo;s understand its use:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">1</span>)(<span style="color:#ae81ff">2</span>) <span style="color:#75715e">//output: 3
+</span></span></span></code></pre></div><p>Remember that we recently realized that there are two functions at play here. That is why we see two sets of <code>()</code> round brackets here as well, because both functions are being called. But how?</p>
+<p>Let&rsquo;s call only the first function and see what happens.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">1</span>) <span style="color:#75715e">//output: a function
+</span></span></span></code></pre></div><p>Here we have called only the first function, i.e. the function that takes <code>(a)</code> and returns another (inner) function. Let&rsquo;s store that returned (inner) function in another variable.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">sum2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">1</span>)
+</span></span></code></pre></div><p>Now <code>sum2</code> contains our second function <code>(b) =&gt; a + b</code>.</p>
+<p>Here comes the most important thing to understand. When we called <code>sum(1)</code>, the <code>sum</code> function computed the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">a</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (<span style="color:#a6e22e">b</span>) =&gt; <span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Since the value of <code>a=1</code> was passed to it as argument, it goes as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (<span style="color:#a6e22e">b</span>) =&gt; <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This is the function that is returned from <code>sum(1)</code> and is stored in <code>sum2</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">sum2</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">b</span>) =&gt; <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span>
+</span></span></code></pre></div><p>Now let&rsquo;s call <code>sum2</code> as well:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">sum2</span>(<span style="color:#ae81ff">2</span>) <span style="color:#75715e">//output: 3
+</span></span></span></code></pre></div><p>Why is the output <code>3</code>? Because sum2 was:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">sum2</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">b</span>) =&gt; <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span>
+</span></span></code></pre></div><p>So when we gave it <code>b=2</code>, it did the following computation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">sum2</span> <span style="color:#f92672">=</span> (<span style="color:#ae81ff">2</span>) =&gt; <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#75715e">//output: 3
+</span></span></span></code></pre></div><h3 id="winding-up">Winding Up</h3>
+<p>So we understand that the whole point of the first function <code>sum(a)</code> was to generate another function <code>sum2(b)</code> in which the value of <code>a</code> was fixed. No matter what value of <code>b</code> we give to <code>sum2(b)</code>, it will always use the same value of <code>a</code> which was used when generating <code>sum2(b)</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">sum2</span>(<span style="color:#ae81ff">5</span>)  <span style="color:#75715e">//output: 1 + 5 = 6
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">sum2</span>(<span style="color:#ae81ff">10</span>) <span style="color:#75715e">//output: 1 + 10 = 11
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">sum2</span>(<span style="color:#ae81ff">19</span>) <span style="color:#75715e">//output: 1 + 19 = 20
+</span></span></span></code></pre></div><p>If we had generated a different <code>sum2</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">sum2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sum2</span>(<span style="color:#ae81ff">50</span>) <span style="color:#75715e">//output: 10 + 50 = 60
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">sum2</span>(<span style="color:#ae81ff">90</span>) <span style="color:#75715e">//output: 10 + 90 = 100
+</span></span></span></code></pre></div><p>Now coming to the original syntax, all we need to do is call both functions together:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// instead of doing the following:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">sum2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sum2</span>(<span style="color:#ae81ff">90</span>) <span style="color:#75715e">//output: 100
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// we can do the following:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">10</span>)(<span style="color:#ae81ff">90</span>)
+</span></span></code></pre></div><p>The <code>sum(10)</code> statement returns a function (<code>sum2</code>) which is immediately called like this</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">10</span>)(<span style="color:#ae81ff">90</span>) <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">sum2</span>(<span style="color:#ae81ff">90</span>) <span style="color:#f92672">-&gt;</span> <span style="color:#ae81ff">100</span>
+</span></span></code></pre></div><h2 id="why">Why</h2>
+<p>Once you neatly wrap your head around how the <strong>super function</strong> works, we can look at why you would want to use it. Let&rsquo;s look at a few cases:</p>
+<blockquote>
+<p>If you need a non-React example, read Case 2 instead of Case 1</p>
+</blockquote>
+<h3 id="case-1-problem">Case 1: Problem</h3>
+<p>We will do the following steps in this example:</p>
+<ol>
+<li>Say we have a <strong>React</strong> application that needs to get some data from an <strong>API</strong>, store this data in a <strong>state</strong> variable, and then <strong>render</strong> it.</li>
+<li>Say we have a function called <code>getResponse()</code> that sends a request to a remote server and returns a <code>promise</code>. We will pass the <code>response</code> through <code>JSON.parse()</code> to get an <code>array</code> of strings.</li>
+<li>We will then remove a particular string, e.g. <code>'bla'</code> from the <code>array</code> of strings.</li>
+<li>We will save the <code>response</code> in a state variable for rendering.</li>
+</ol>
+<h3 id="case-1-solution">Case 1: Solution</h3>
+<p>Let&rsquo;s have a look at the code.</p>
+<h4 id="step-1">Step 1</h4>
+<p>For step 1, we have a state variable to store the array of strings.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">list</span>, <span style="color:#a6e22e">setList</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>([])
+</span></span></code></pre></div><h4 id="step-2">Step 2</h4>
+<p>For step 2, we will call <code>getResponse()</code>, and then once the returned <code>promise</code> resolves to give us a <code>response</code>, we will parse the <code>response</code> to get an array of strings.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">getResponse</span>()
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">response</span>))
+</span></span></code></pre></div><p>Let&rsquo;s shorten this code a bit:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">getResponse</span>()
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>)
+</span></span></code></pre></div><h4 id="step-3">Step 3</h4>
+<p>For step 3, we will filter out a string <code>str</code>, e.g. <code>'bla'</code> from the array by comparing each <code>element</code> of the array with <code>str</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex; background-color:#3c3d38"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">str</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bla&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">getResponse</span>()
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>)
+</span></span><span style="display:flex; background-color:#3c3d38"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">arr</span> =&gt; <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">elem</span> =&gt; <span style="color:#a6e22e">elem</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">str</span>))
+</span></span></code></pre></div><p>We can refactor this code to make it neater. Let&rsquo;s extract the array filtration logic into a separate function that takes the array and returns the filtered array.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">str</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bla&#39;</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">removeString</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>) =&gt; <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">elem</span> =&gt; <span style="color:#a6e22e">elem</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">str</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">getResponse</span>()
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>)
+</span></span><span style="display:flex; background-color:#3c3d38"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">removeString</span>)
+</span></span></code></pre></div><p>However, this is not good code. The function <code>removeString</code> is <strong>impure</strong>. Its output depends on a variable <code>str</code> that is not one of its parameters. This makes its output <strong>unpredictable</strong> and the function <strong>untestable</strong>. This also makes the following highlighted line difficult to understand.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">str</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bla&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">removeString</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>) =&gt; <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">elem</span> =&gt; <span style="color:#a6e22e">elem</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">str</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">getResponse</span>()
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>)
+</span></span><span style="display:flex; background-color:#3c3d38"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">removeString</span>)
+</span></span></code></pre></div><p>We don&rsquo;t know which string is being removed by the <code>removeString</code> function. We have to scan the code looking for the string.
+Let&rsquo;s fix this by making <code>removeString</code> a pure function and passing it everything it needs as an argument.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// impure
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">removeString</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>) =&gt; <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">elem</span> =&gt; <span style="color:#a6e22e">elem</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">str</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// pure
+</span></span></span><span style="display:flex; background-color:#3c3d38"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">removeString</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>, <span style="color:#a6e22e">str</span>) =&gt; <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">elem</span> =&gt; <span style="color:#a6e22e">elem</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">str</span>)
+</span></span></code></pre></div><p>Now let&rsquo;s update the call to <code>removeString</code> accordingly:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">removeString</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>, <span style="color:#a6e22e">str</span>) =&gt; <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">elem</span> =&gt; <span style="color:#a6e22e">elem</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">str</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">getResponse</span>()
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>)
+</span></span><span style="display:flex; background-color:#3c3d38"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; <span style="color:#a6e22e">removeString</span>(<span style="color:#a6e22e">response</span>, <span style="color:#e6db74">&#39;bla&#39;</span>))
+</span></span></code></pre></div><p>Wait! Why didn&rsquo;t we just write the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">removeString</span>)
+</span></span></code></pre></div><p>That&rsquo;s because .then() only passes the <code>array</code> to our <code>removeString</code> function, whereas our <code>removeString</code> function now needs <strong>two</strong> arguments: <code>array</code>, and <code>str</code>. So we pass the second parameter ourselves:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; <span style="color:#a6e22e">removeString</span>(<span style="color:#a6e22e">response</span>, <span style="color:#e6db74">&#39;bla&#39;</span>))
+</span></span></code></pre></div><p>That&rsquo;s fine, but it&rsquo;s too long. We can use our <strong>super arrow functions</strong> to shorten it.
+Let&rsquo;s make <code>removeString</code> a super function. It will take a particular string as argument and will return another function that will filter out that particular string from any array.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex; background-color:#3c3d38"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">removeString</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">str</span>) =&gt; (<span style="color:#a6e22e">arr</span>) =&gt; <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">elem</span> =&gt; <span style="color:#a6e22e">elem</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">str</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">getResponse</span>()
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>)
+</span></span><span style="display:flex; background-color:#3c3d38"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">removeString</span>(<span style="color:#e6db74">&#39;bla&#39;</span>))
+</span></span></code></pre></div><p>Now that&rsquo;s easily readable.</p>
+<h4 id="step-4">Step 4</h4>
+<p>For step 4, we will save the response in the state <code>list</code> variable using <code>setList</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">getResponse</span>()
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>)
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">removeString</span>(<span style="color:#e6db74">&#39;bla&#39;</span>))
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">setList</span>)
+</span></span></code></pre></div><p>Beautiful!</p>
+<p>That should be enough.
+However, if you optionally need another example problem (that does not involve React or promises), here is another one:</p>
+<h3 id="case-2-problem">Case 2: Problem</h3>
+<p>Say we have the following two things as input:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span></code></pre></div><p>We want to write a function that takes the above two things as input and returns a new array which is formed by performing the following operations (in order) on the input array <code>arr</code>:</p>
+<ol>
+<li>remove all negative numbers from the array</li>
+<li>add the number <code>a</code> to all of the numbers of the input array, i.e. the resultant array in this case will be <code>[1+a, 2+a, 3+a, 4+a, 5+a]</code></li>
+<li>now remove all odd numbers from the resultant array</li>
+</ol>
+<h4 id="example">Example</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// inputs:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> [<span style="color:#f92672">-</span><span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// step 1: remove negative numbers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// step 2: add a to all elements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>[<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">15</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// step 3: remove odd elements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>[<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">14</span>]
+</span></span></code></pre></div><p>Given any values of <code>arr</code> and <code>a</code>, how would we write a function named <code>performOperations(arr, a)</code> to find the output?</p>
+<h3 id="case-2-solution">Case 2: Solution</h3>
+<p>Let&rsquo;s do step 1 first and remove negative numbers using <code>arr.filter()</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">performOperations</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>, <span style="color:#a6e22e">a</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The above function returns the input array with all negative numbers removed.
+Let&rsquo;s do step 2 on the filtered array and add <code>a</code> to all numbers of the array:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">performOperations</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>, <span style="color:#a6e22e">a</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">arr</span>
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">a</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The above function filters out negative numbers from the input array, and then adds <code>a</code> to all elements of the filtered array.
+Finally, let&rsquo;s do step 3 and remove all odd numbers:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">performOperations</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>, <span style="color:#a6e22e">a</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">arr</span>
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">a</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="solution-refactored">Solution Refactored</h3>
+<h4 id="refactoring-step-1">Refactoring Step 1</h4>
+<p>Let&rsquo;s see how we can change step 1.</p>
+<p>We have an <code>arr.filter()</code> to filter out negative numbers. What if we were to extract out the arrow function that we are passing to <code>arr.filter()</code>? I am talking about the following highlighted function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">performOperations</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>, <span style="color:#a6e22e">a</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">arr</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>            .<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">a</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>We extract that arrow function into a separate utility function called <code>isNonNegative</code> and pass it to <code>arr.filter()</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex; background-color:#3c3d38"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isNonNegative</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">performOperations</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>, <span style="color:#a6e22e">a</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">arr</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>            .<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isNonNegative</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">a</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="refactoring-step-3">Refactoring Step 3</h4>
+<p>Let&rsquo;s see how we can change step 3. We will return to step 2 and we will use our super arrow functions there. Meanwhile step 3 can be refactored just like we refactored step 1. We extract out the filtering arrow function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isNonNegative</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isEven</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">performOperations</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>, <span style="color:#a6e22e">a</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">arr</span>
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isNonNegative</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">a</span>)
+</span></span><span style="display:flex; background-color:#3c3d38"><span>            .<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isEven</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Let&rsquo;s also remove the curly braces <code>{}</code> and <code>return</code> keyword from the main arrow function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isNonNegative</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isEven</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">performOperations</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>, <span style="color:#a6e22e">a</span>) =&gt; 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isNonNegative</span>)
+</span></span><span style="display:flex;"><span>           .<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">a</span>)
+</span></span><span style="display:flex;"><span>           .<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isEven</span>)
+</span></span></code></pre></div><h4 id="refactoring-step-2">Refactoring Step 2</h4>
+<p>Notice how the two filter statements now look so neat and are immediately understandable at a single glance, but the map is longer. Can we extract out the arrow function inside <code>arr.map()</code> in the same way?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isNonNegative</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isEven</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">performOperations</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>, <span style="color:#a6e22e">a</span>) =&gt; 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isNonNegative</span>)
+</span></span><span style="display:flex; background-color:#3c3d38"><span>           .<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">a</span>)
+</span></span><span style="display:flex;"><span>           .<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isEven</span>)
+</span></span></code></pre></div><p>Let&rsquo;s try to store <code>element =&gt; element + a</code> in a separate function and use it in <code>arr.map()</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isNonNegative</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isEven</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">addNumber</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">a</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">performOperations</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>, <span style="color:#a6e22e">a</span>) =&gt; 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isNonNegative</span>)
+</span></span><span style="display:flex; background-color:#3c3d38"><span>           .<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">addNumber</span>)
+</span></span><span style="display:flex;"><span>           .<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isEven</span>)
+</span></span></code></pre></div><p>But that will not work! Why? <code>addNumber</code> does not know what <code>a</code> is. Hmm&hellip; let&rsquo;s pass add <code>a</code> to its parameters then:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isNonNegative</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isEven</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">addNumber</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">element</span>, <span style="color:#a6e22e">a</span>) =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">a</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">performOperations</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>, <span style="color:#a6e22e">a</span>) =&gt; 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isNonNegative</span>)
+</span></span><span style="display:flex;"><span>           .<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">addNumber</span>)
+</span></span><span style="display:flex;"><span>           .<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isEven</span>)
+</span></span></code></pre></div><p>But wait, this will still not work, because javascript&rsquo;s <code>.map()</code> function will not pass the value of <code>a</code> to our <code>addNumber(element, a)</code> function. <code>.map()</code> only passes the array <code>element</code> to our provided function.</p>
+<p>If only there were a way for us to generate an <code>addNumber</code> function with a fixed <code>a</code> value, that took only one argument (<code>element</code>). Aha! Super arrow functions!</p>
+<p>Let&rsquo;s turn <code>addNumber</code> into a super arrow function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isNonNegative</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isEven</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">addNumber</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">a</span>) =&gt; (<span style="color:#a6e22e">element</span>) =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">a</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">performOperations</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>, <span style="color:#a6e22e">a</span>) =&gt; 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isNonNegative</span>)
+</span></span><span style="display:flex;"><span>           .<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">addNumber</span>)
+</span></span><span style="display:flex;"><span>           .<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isEven</span>)
+</span></span></code></pre></div><p>So now, we can use <code>addNumber</code> to generate a function that takes only one argument (<code>element</code>) and this function can be passed to <code>.map()</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isNonNegative</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isEven</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">addNumber</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">a</span>) =&gt; (<span style="color:#a6e22e">element</span>) =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">a</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">performOperations</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>, <span style="color:#a6e22e">a</span>) =&gt; 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isNonNegative</span>)
+</span></span><span style="display:flex; background-color:#3c3d38"><span>           .<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">addNumber</span>(<span style="color:#a6e22e">a</span>))
+</span></span><span style="display:flex;"><span>           .<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isEven</span>)
+</span></span></code></pre></div><p>Done! Our <code>performOperations</code> function is now ready:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">performOperations</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>, <span style="color:#a6e22e">a</span>) =&gt; 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isNonNegative</span>).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">addNumber</span>(<span style="color:#a6e22e">a</span>)).<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isEven</span>)
+</span></span></code></pre></div><p>You can read that one line and know exactly what is happening without giving it a second thought: <em>array -&gt; filter non negative numbers -&gt; add the number <code>a</code> -&gt; filter even numbers</em></p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "rohanhussain-com-blog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://www.rohanhussain.com/blog/" >
+    &copy;  Rohan Hussain's Blog 2022 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
