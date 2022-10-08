@@ -39,7 +39,7 @@
 <meta itemprop="name" content="Javascript Super Arrow Functions">
 <meta itemprop="description" content="Arrow functions that return arrow functions () =&gt; () =&gt; ..."><meta itemprop="datePublished" content="2022-10-08T11:35:18+05:00" />
 <meta itemprop="dateModified" content="2022-10-08T11:35:18+05:00" />
-<meta itemprop="wordCount" content="2250">
+<meta itemprop="wordCount" content="2252">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Javascript Super Arrow Functions"/>
 <meta name="twitter:description" content="Arrow functions that return arrow functions () =&gt; () =&gt; ..."/>
@@ -213,8 +213,8 @@ At first glance, one can estimate that the <code>sum</code> function above compu
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">sum2</span>(<span style="color:#ae81ff">90</span>) <span style="color:#75715e">//output: 100
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// we can do the following:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">10</span>)(<span style="color:#ae81ff">90</span>)
-</span></span></code></pre></div><p>The <code>sum(10)</code> statement returns a function (<code>sum2</code>) which is immediately called like this</p>
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">10</span>)(<span style="color:#ae81ff">90</span>) <span style="color:#75715e">//output: 100
+</span></span></span></code></pre></div><p>The <code>sum(10)</code> statement returns a function (<code>sum2</code>) which is immediately called like this</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">10</span>)(<span style="color:#ae81ff">90</span>) <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">sum2</span>(<span style="color:#ae81ff">90</span>) <span style="color:#f92672">-&gt;</span> <span style="color:#ae81ff">100</span>
 </span></span></code></pre></div><h2 id="why">Why</h2>
 <p>Once you neatly wrap your head around how the <strong>super function</strong> works, we can look at why you would want to use it. Let&rsquo;s look at a few cases:</p>
