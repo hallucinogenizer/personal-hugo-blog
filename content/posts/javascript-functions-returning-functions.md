@@ -7,7 +7,7 @@ draft: false
 
 You may have seen arrow functions written like this:
 ```javascript
-const sum = (a) => (b) => (c) => a+b+c
+const sum = (a) => (b) => (c) => a + b + c
 ```
 This article will explain how in some cases, the above syntax can help us write clean, concise, and functionally pure code.
 At first glance, one can estimate that the `sum` function above computes the sum of three numbers `a`, `b`, `c`. 
