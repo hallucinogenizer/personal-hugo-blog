@@ -181,7 +181,7 @@ getResponse()
 #### Step 3
 For step 3, we will filter out a string `str`, e.g. `'bla'` from the array by comparing each `element` of the array with `str`:
 ```javascript {hl_lines="1 5"}
-const str = 'bla'
+let str = 'bla'
 
 getResponse()
 .then(JSON.parse)
@@ -189,16 +189,16 @@ getResponse()
 ```
 We can refactor this code to make it neater. Let's extract the array filtration logic into a separate function that takes the array and returns the filtered array.
 ```javascript {hl_lines="2 6"}
-const str = 'bla'
+let str = 'bla'
 const removeString = (arr) => arr.filter(elem => elem !== str)
 
 getResponse()
 .then(JSON.parse)
 .then(removeString)
 ```
-However, this is not good code. The function `removeString` is **impure**. Its output depends on a variable `str` that is not one of its parameters. This makes its output **unpredictable** and the function **untestable**. This also makes the following highlighted line difficult to understand. 
+However, this is not good code. The function `removeString` can be **impure** if the value of `str` can be changed by some other function in the code.. Its output depends on a variable `str` that is not one of its parameters. This makes its output **unpredictable** and the function **untestable**. This also makes the following highlighted line difficult to understand. 
 ```javascript {hl_lines="6"}
-const str = 'bla'
+let str = 'bla'
 const removeString = (arr) => arr.filter(elem => elem !== str)
 
 getResponse()
