@@ -1,6 +1,6 @@
 ---
-title: "JavaScript Super Arrow Functions"
-summary: "Arrow functions that return arrow functions `() => () => ...`"
+title: "Curried Functions in JavaScript"
+summary: "Functions that are called like this: `sum(a)(b)(c)`"
 date: 2022-10-08T11:35:18+05:00
 draft: false
 ---
@@ -147,7 +147,7 @@ sum(10)(90) -> sum2(90) -> 100
 ``` 
 
 ## Why
-Once you neatly wrap your head around how the **super function** works, we can look at why you would want to use it. Let's look at a few cases:
+Once you neatly wrap your head around how the **curried function** works, we can look at why you would want to use it. Let's look at a few cases:
 
 > If you need a non-React example, read Case 2 instead of Case 1
 ### Case 1: Problem
@@ -233,8 +233,8 @@ That's because .then() only passes the `array` to our `removeString` function, w
 .then(response => removeString(response, 'bla'))
 ```
 
-That's fine, but it's too long. We can use our **super arrow functions** to shorten it. 
-Let's make `removeString` a super function. It will take a particular string as argument and will return another function that will filter out that particular string from any array. 
+That's fine, but it's too long. We can use our **curried arrow functions** to shorten it. 
+Let's make `removeString` a curried function. It will take a particular string as argument and will return another function that will filter out that particular string from any array. 
 ```javascript {hl_lines="1 5"}
 const removeString = (str) => (arr) => arr.filter(elem => elem !== str)
 
@@ -338,7 +338,7 @@ const performOperations = (arr, a) => {
 ```
 
 #### Refactoring Step 3
-Let's see how we can change step 3. We will return to step 2 and we will use our super arrow functions there. Meanwhile step 3 can be refactored just like we refactored step 1. We extract out the filtering arrow function:
+Let's see how we can change step 3. We will return to step 2 and we will use our curried arrow functions there. Meanwhile step 3 can be refactored just like we refactored step 1. We extract out the filtering arrow function:
 ```javascript {hl_Lines="2 8"}
 const isNonNegative = element => element >= 0
 const isEven = element => element % 2 === 0
@@ -400,9 +400,9 @@ const performOperations = (arr, a) =>
 
 But wait, this will still not work, because javascript's `.map()` function will not pass the value of `a` to our `addNumber(element, a)` function. `.map()` only passes the array `element` to our provided function. 
 
-If only there were a way for us to generate an `addNumber` function with a fixed `a` value, that took only one argument (`element`). Aha! Super arrow functions!
+If only there were a way for us to generate an `addNumber` function with a fixed `a` value, that took only one argument (`element`). Aha! Curried arrow functions!
 
-Let's turn `addNumber` into a super arrow function:
+Let's turn `addNumber` into a curried arrow function:
 ```javascript {hl_Lines="3"}
 const isNonNegative = element => element >= 0
 const isEven = element => element % 2 === 0

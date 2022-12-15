@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>JavaScript Super Arrow Functions | Rohan Hussain&#39;s Blog</title>
+    <title>Curried Functions in JavaScript | Rohan Hussain&#39;s Blog</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="Arrow functions that return arrow functions () =&gt; () =&gt; ...">
-    <meta name="generator" content="Hugo 0.103.0" />
+    <meta name="description" content="Functions that are called like this: sum(a)(b)(c)">
+    <meta name="generator" content="Hugo 0.105.0">
     
     
     
@@ -29,20 +29,20 @@
 
     
     
-    <meta property="og:title" content="JavaScript Super Arrow Functions" />
-<meta property="og:description" content="Arrow functions that return arrow functions () =&gt; () =&gt; ..." />
+    <meta property="og:title" content="Curried Functions in JavaScript" />
+<meta property="og:description" content="Functions that are called like this: sum(a)(b)(c)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.rohanhussain.com/blog/posts/javascript-functions-returning-functions/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-10-08T11:35:18+05:00" />
 <meta property="article:modified_time" content="2022-10-08T11:35:18+05:00" />
 
-<meta itemprop="name" content="JavaScript Super Arrow Functions">
-<meta itemprop="description" content="Arrow functions that return arrow functions () =&gt; () =&gt; ..."><meta itemprop="datePublished" content="2022-10-08T11:35:18+05:00" />
+<meta itemprop="name" content="Curried Functions in JavaScript">
+<meta itemprop="description" content="Functions that are called like this: sum(a)(b)(c)"><meta itemprop="datePublished" content="2022-10-08T11:35:18+05:00" />
 <meta itemprop="dateModified" content="2022-10-08T11:35:18+05:00" />
 <meta itemprop="wordCount" content="2271">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="JavaScript Super Arrow Functions"/>
-<meta name="twitter:description" content="Arrow functions that return arrow functions () =&gt; () =&gt; ..."/>
+<meta name="twitter:title" content="Curried Functions in JavaScript"/>
+<meta name="twitter:description" content="Functions that are called like this: sum(a)(b)(c)"/>
 
 	
   </head>
@@ -121,7 +121,7 @@
   </div>
 
 
-      <h1 class="f1 athelas mt3 mb1">JavaScript Super Arrow Functions</h1>
+      <h1 class="f1 athelas mt3 mb1">Curried Functions in JavaScript</h1>
       
       
       
@@ -217,7 +217,7 @@ At first glance, one can estimate that the <code>sum</code> function above compu
 </span></span></span></code></pre></div><p>The <code>sum(10)</code> statement returns a function (<code>sum2</code>) which is immediately called. Imagine these steps like this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">10</span>)(<span style="color:#ae81ff">90</span>) <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">sum2</span>(<span style="color:#ae81ff">90</span>) <span style="color:#f92672">-&gt;</span> <span style="color:#ae81ff">100</span>
 </span></span></code></pre></div><h2 id="why">Why</h2>
-<p>Once you neatly wrap your head around how the <strong>super function</strong> works, we can look at why you would want to use it. Let&rsquo;s look at a few cases:</p>
+<p>Once you neatly wrap your head around how the <strong>curried function</strong> works, we can look at why you would want to use it. Let&rsquo;s look at a few cases:</p>
 <blockquote>
 <p>If you need a non-React example, read Case 2 instead of Case 1</p>
 </blockquote>
@@ -279,8 +279,8 @@ Let&rsquo;s fix this by making <code>removeString</code> a pure function and pas
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">removeString</span>)
 </span></span></code></pre></div><p>That&rsquo;s because .then() only passes the <code>array</code> to our <code>removeString</code> function, whereas our <code>removeString</code> function now needs <strong>two</strong> arguments: <code>array</code>, and <code>str</code>. So we pass the second parameter ourselves:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>.<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; <span style="color:#a6e22e">removeString</span>(<span style="color:#a6e22e">response</span>, <span style="color:#e6db74">&#39;bla&#39;</span>))
-</span></span></code></pre></div><p>That&rsquo;s fine, but it&rsquo;s too long. We can use our <strong>super arrow functions</strong> to shorten it.
-Let&rsquo;s make <code>removeString</code> a super function. It will take a particular string as argument and will return another function that will filter out that particular string from any array.</p>
+</span></span></code></pre></div><p>That&rsquo;s fine, but it&rsquo;s too long. We can use our <strong>curried arrow functions</strong> to shorten it.
+Let&rsquo;s make <code>removeString</code> a curried function. It will take a particular string as argument and will return another function that will filter out that particular string from any array.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex; background-color:#3c3d38"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">removeString</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">str</span>) =&gt; (<span style="color:#a6e22e">arr</span>) =&gt; <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">elem</span> =&gt; <span style="color:#a6e22e">elem</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">str</span>)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">getResponse</span>()
@@ -360,7 +360,7 @@ Finally, let&rsquo;s do step 3 and remove all odd numbers:</p>
 </span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>)
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h4 id="refactoring-step-3">Refactoring Step 3</h4>
-<p>Let&rsquo;s see how we can change step 3. We will return to step 2 and we will use our super arrow functions there. Meanwhile step 3 can be refactored just like we refactored step 1. We extract out the filtering arrow function:</p>
+<p>Let&rsquo;s see how we can change step 3. We will return to step 2 and we will use our curried arrow functions there. Meanwhile step 3 can be refactored just like we refactored step 1. We extract out the filtering arrow function:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isNonNegative</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>
 </span></span><span style="display:flex; background-color:#3c3d38"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isEven</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>
 </span></span><span style="display:flex;"><span>
@@ -406,8 +406,8 @@ Finally, let&rsquo;s do step 3 and remove all odd numbers:</p>
 </span></span><span style="display:flex;"><span>           .<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">addNumber</span>)
 </span></span><span style="display:flex;"><span>           .<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">isEven</span>)
 </span></span></code></pre></div><p>But wait, this will still not work, because javascript&rsquo;s <code>.map()</code> function will not pass the value of <code>a</code> to our <code>addNumber(element, a)</code> function. <code>.map()</code> only passes the array <code>element</code> to our provided function.</p>
-<p>If only there were a way for us to generate an <code>addNumber</code> function with a fixed <code>a</code> value, that took only one argument (<code>element</code>). Aha! Super arrow functions!</p>
-<p>Let&rsquo;s turn <code>addNumber</code> into a super arrow function:</p>
+<p>If only there were a way for us to generate an <code>addNumber</code> function with a fixed <code>a</code> value, that took only one argument (<code>element</code>). Aha! Curried arrow functions!</p>
+<p>Let&rsquo;s turn <code>addNumber</code> into a curried arrow function:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isNonNegative</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isEven</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">element</span> =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>
 </span></span><span style="display:flex; background-color:#3c3d38"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">addNumber</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">a</span>) =&gt; (<span style="color:#a6e22e">element</span>) =&gt; <span style="color:#a6e22e">element</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">a</span>
